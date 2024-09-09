@@ -1,6 +1,6 @@
 Questions:
 
-1.Explain how you implemented the checklist above step-by-step (not just following the tutorial).
+1>>> Explain how you implemented the checklist above step-by-step (not just following the tutorial).
 
 1>> Creating the Django project.
 1> I first made a folder called e-commerce-app and then iniated an environment in the same directory.
