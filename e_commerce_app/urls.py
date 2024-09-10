@@ -1,5 +1,5 @@
 """
-URL configuration for e_commerce_app project.
+URL configuration for mental_health_tracker project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
