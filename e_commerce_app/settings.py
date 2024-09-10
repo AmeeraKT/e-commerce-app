@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-j3yqhx+&4dja3wdxqaf31&a*jf20vn(sznltd^!7qr_w_n=a1y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "ameera.khaira-ECommerceApplicationCookiePanda.pbp.cs.ui.ac.id"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "ameera-khaira-ECommerceApplicationCookiePanda.pbp.cs.ui.ac.id"]
 
 
 # Application definition
