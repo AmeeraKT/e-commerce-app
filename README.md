@@ -31,7 +31,17 @@ Questions:
 
 
     3>> Perform routing in the project so that the application main can run.
-    
+        1> I created a file called urls.py in the folder e-commerce-app
+        2> I then added the following code in the file:
+            from django.urls import path
+            from main.views import show_main
+
+            app_name = 'main'
+
+            urlpatterns = [
+                path('', show_main, name='show_main'),
+            ]
+        
     
     4>> Create a model in the application main with the name Product and have the mandatory attributes as follows.
         name
@@ -46,8 +56,8 @@ Questions:
     
     8>> Create a README.md that contains a link to the PWS application that has been deployed, as well as answers to the following questions.
 
-        I created the README.md file in the e-commerce-app folder locally and filled it with my answers and a link to the PWS application.
-        I then pushed it to the PWS website.
+        1> I created the README.md file in the e-commerce-app folder locally and illed it with my answers and a link to the PWS application.
+        2> I then pushed it to the PWS website using the command ...
 
 
 2>>> Create a diagram that contains the request client to a Django-based web application and the response it gives, and explain the relationship between urls.py, views.py, models.py, and the html file.
