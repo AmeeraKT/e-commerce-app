@@ -31,26 +31,43 @@ Questions:
 
 
     3>> Perform routing in the project so that the application main can run.
-        1> I created a file called urls.py in the folder e-commerce-app
-        2> I then added the following code in the file:
-            from django.urls import path
-            from main.views import show_main
-
-            app_name = 'main'
-
-            urlpatterns = [
-                path('', show_main, name='show_main'),
-            ]
-        
+        1> I ran the command
+                python manage.py runserver
+        2> I checked the if the application is up, running and displayed properly by visiting this link http://localhost:8000/
     
     4>> Create a model in the application main with the name Product and have the mandatory attributes as follows.
         name
         price
         description
 
+        1> I created a model in the models.py file in the main folder by adding the following code:
+
     5>> Create a function in views.py to return to an HTML template that displays the name of the application and your name and class.
+        1> I created a function that will display the details I want to show in the application
+                def show_main(request):
+                    context = {
+                        'name' : 'Cookie',
+                        'price': '5000',
+                        'description': 'Homey chocolate chip cookies baked fresh everyday'
+                    }
+
+                    return render(request, "main.html", context)
 
     6>> Create a routing in urls.py for the application main to map the function created in views.py.
+        
+        1> I created a file called urls.py in the folder e-commerce-app
+        2> I then added the following code in the file to configure URL routing for the main application:
+                from django.urls import path
+                from main.views import show_main
+
+                app_name = 'main'
+
+                urlpatterns = [
+                    path('', show_main, name='show_main'),
+                ]
+        3> To configure URL routing for the project, I added the following code to the urls.py file in the e_commerce_app folder
+                from django.urls import path, include
+                path('', include('main.urls'))
     
     7>> Perform deployment to PWS for the application that has been created so that it can be accessed by others via the Internet.
     
