@@ -41,6 +41,15 @@ Questions:
         description
 
         1> I created a model in the models.py file in the main folder by adding the following code:
+            from django.db import models
+
+            class Product(models.Model):
+                nameclass = models.CharField(max_length=255)
+                name = models.CharField(max_length=255)
+                price = models.IntegerField()
+                description = models.TextField()
+
+            I ensured that the class types matched the attributes 
 
     5>> Create a function in views.py to return to an HTML template that displays the name of the application and your name and class.
         1> I created a function that will display the details I want to show in the application
@@ -70,16 +79,30 @@ Questions:
                 path('', include('main.urls'))
     
     7>> Perform deployment to PWS for the application that has been created so that it can be accessed by others via the Internet.
+        1>  I ran the command git remote add pws https://pbp.cs.ui.ac.id/ameera.khaira/ECommerceApplicationCookiePanda
+        2> I then ran branch -M master
+        3> Finally I ran push pws master to push to deploy my application to the PWS website
     
     8>> Create a README.md that contains a link to the PWS application that has been deployed, as well as answers to the following questions.
 
         1> I created the README.md file in the e-commerce-app folder locally and illed it with my answers and a link to the PWS application.
-        2> I then pushed it to the PWS website using the command ...
+        2> I then pushed it to the PWS website using the command git push pws master
 
 
 2>>> Create a diagram that contains the request client to a Django-based web application and the response it gives, and explain the relationship between urls.py, views.py, models.py, and the html file.
 
-    A 
+    The diagram can be viewed here:
+    https://www.canva.com/design/DAGQa2NaV_w/lpAkdv4Nm4Nxq_DF9vyg2A/view?utm_content=DAGQa2NaV_w&utm_campaign=designshare&utm_medium=link&utm_source=editor
+
+    The urls.py file handles any HTTP requests such as a user wanting to open a Django-based web application like in this assignment. Once the request is received,
+    the show_main function in urls.py will call said function in views.py.
+
+    The file views.py will call the show_main function with the request passed to it from urls.py as a parameter. The views.py file will then query the database containing the data of the objects which are stored in models.py.
+    The views.py file will also look into the HTML file and organize the data obtained from models.py based on the format in main.html. The views.py file will then send a response, which is the way the web application and its data should be displayed on a browser, back to urls.py so the HTTP response is received and displayed on a browser.
+
+    The file models.py contains information about the data types of the attributes, it provides the data of the web application to be displayed to views.py.
+    
+    The HTML file dictates how the data of the web application should be presented on a web browser. 
 
 
 3>>> Explain the use of git in software development!
@@ -97,6 +120,8 @@ Questions:
     Since Python is the most commonly used computer language, I believe that Django is a suitable introduction to learning software
     development as it requires Python.
     The syntax is also straightforward, simple and human-friendly enough to understand just like Python as a language. 
+    Django already creates a base template that's simple too so that users who are new to software development are able to familiarize
+    themselves with it quicker.
 
 
 
