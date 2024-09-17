@@ -1,11 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
 <h1>Cookie Panda</h1>
 
 
 <h5>Name and Class: </h5>
 <p>{{ nameclass }}<p>
+
 <h5>Name: </h5>
 <p>{{ name }}<p>
+
 <h5>Price: </h5>
 <p>{{ price }}<p>
+
 <h5>Description: </h5>
 <p>{{ description }}<p>
+
+{% if not product_entries %}
+<p>There is no product in the Cookie Panda E-Commerce Application.</p>
+{% else %}
+<table>
+    <tr>
+    <th>Product Name</th>
+    <th>Description</th>
+    <th>Price</th>
+    </tr>
+    
+    {% comment %} This is how to display product data
+    {% endcomment %} 
+    {% for product_entry in product_entries %}
+    <tr>
+    <td>{{product_entry.name}}</td>
+    <td>{{product_entry.description}}</td>
+    <td>{{product_entry.price}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+    
+<a href="{% url 'main:create_product_entry' %}">
+    <button>Add New Product Entry</button>
+</a>
+{% endblock content %}

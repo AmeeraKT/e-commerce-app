@@ -1,4 +1,4 @@
-Questions:
+# == Assignment 2 Questions: ==
 
 1>>> Explain how you implemented the checklist above step-by-step (not just following the tutorial).
 
@@ -130,3 +130,50 @@ Questions:
     ORM stands for 'Object Relational Mapper'. An ORM is a technique that essentially connects object oriented programs to relational
     databases. This allows programmers to interact with relational databases through object oriented programming. Django has an ORM which lets it change default database structures into Python classes so that they can be worked with in full Python language, meaning there
     is no need to use SQL language to create or manage a database.
+
+
+# == ASSIGNMENT 3 ==
+
+1> Answer the following questions in README.md in the root folder.
+ 
+    1>> Explain why we need data delivery in implementing a platform.
+ 
+    2>> In your opinion, which is better, XML or JSON? Why is JSON more popular than XML?
+    
+    3>> Explain the functional usage of is_valid() method in Django forms. Also explain why we need the method in forms.
+
+        The function is_valid() ensures that no faulty information is inputted into forms. This eliminates the need for administrators to read through and check forms that have wrong data inputted such as numbers in a query for words, thus saving time.
+        This also prevents users from accidentally inputting the wrong or empty data in forms, giving them a chance to recheck their answers.
+    
+    4>> Why do we need csrf_token when creating a form in Django? What could happen if we did not use csrf_token on a Django form? How could this be leveraged by an attacker?
+
+        They provide security.
+    
+    5>> Explain how you implemented the checklist above step-by-step (not just following the tutorial).
+
+        1>>> Create a form input to add a model object to the previous app.
+
+            1> I first created a base template for all the other web pages called base.html.
+            2> I then added BASE_DIR / 'templates' in settings.py in e_commerce_app so that base.html will be detected as a base file.
+            3> Next I added the following lines to main.html in main/templates {% extends 'base.html' %} {% block content %}{% endblock content %} so that the data in the django project will be loaded in HTML form easily.
+            4> I then added the lines 'import uuid' and 'id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)'
+            5> I then ran the following commands 'python manage.py makemigrations' and 'python manage.py migrate'
+            6> To create the base of the form, I created a file 'forms.py' in main directory and created a new class ProductEntryForm
+            7> I then added 'redirect' and these two lines 'from main.forms import ProductEntryForm' and 'from main.models import Product' at the top of views.py in main directory.
+            8> In views.py, I then created a new function that takes a request and creates a form for the website.
+            9> Then I added the following line in views.py 'product_entries = Product.objects.all()' so that the project can retrieve data about the Product objects from the database.
+            10> To set up URL routing for the function that creates the form I added 'path('create-product-entry', create_product_entry, name='create_product_entry')' and imported create_product_entry.
+            11> I then created create_product_entry.html that dictates how the form will be displayed on a web browser.
+            12> Finally I added extra lines of code in main.html so that the table form can be displayed with a button.
+        
+        
+        2>>> Add 4 views to view the added objects in XML, JSON, XML by ID, and JSON by ID formats. 
+
+            1> I added these two libraries in views.py 'from django.http import HttpResponse' and 'from django.core import serializers'.
+            2> In the same file, I added two functions show_xml and show_json that will translate the data into XML and JSON respectively before displaying them.
+            3> In urls.py I imported the two functions above and added paths for them so that they can be routed to the view.
+            4> To display the data in both XML and JSON by ID I added two more functions that display the two data types by ID in views.py
+            5> In addition, I imported the functions and added URL paths for said functions in urls.py to complete URL routing
+
+        
+        3>>> Create URL routing for each of the views added in point 2.
