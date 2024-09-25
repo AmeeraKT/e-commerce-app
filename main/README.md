@@ -1,3 +1,206 @@
+# == ASSIGNMENT 4 QUESTIONS AND ANSWERS: == #
+
+## 1. What is the difference between HttpResponseRedirect() and redirect()?
+
+    HttpResponseRedirect() takes a URL as the first argument. It's used to direct the user between different web pages on a browser that have a URL.
+    While redirect() is more flexible because it can take URLs, models and views as a parameter. This function will return a HttpResponseRedirect to the respective URL of the parameter given.
+    In this app, it's used to bring the user back to the main page after creating an account. It's shown in this code snippet:
+            
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+
+## 2. Explain how the Product model is linked with User!
+    
+    The product model is linked with every user via foreign key as shown here in models.py
+
+    class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    So each instance of a product model along with all the data of said model is associated with one user
+
+    In views.py, when a product is created it is associated with a user as shown here, as well as the data associated with the product created by the user
+
+                product = form.save(commit=False)
+                roduct.user = request.user
+ 
+## 3. What is the difference between authentication and authorization, and what happens when a user logs in? Explain how Django implements these two concepts.
+
+    Authentication is the process of verifying the correct identity of a user logging in.
+    While authorization is granting said users persmissions for actions based on their role or level in the database, for example an admin of a database has permission to read and write all data.
+
+    When a user logs in, they first undergo authentication.
+    Using the AuthenticationForm module, Django checks if both the username and password inputted both match a user account's login information in the database. When both match then the user logging in is granted access to the website. The get_user() function is ran and it retrieves the user model, alongside all the models and data associated with said user. While getting logged in, Django checks what roles, levels or permission the logged in user has and grants them their permissions. The user is then redirected to the main  page. The login function gives the user a session ID and their requests are tracked via cookies.
+
+    Django uses the modules below for authentication:
+
+    from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+    from django.contrib.auth import authenticate, login, logout
+    from django.contrib.auth.decorators import login_required
+
+    This decorator @login_required(login_url='/login') restricts website access to users who are logged in, this is a form of authorization.
+
+## 4. How does Django remember logged-in users? Explain other uses of cookies and whether all cookies are safe to use.
+
+    It remembers logged-in users based on cookies and sessions. When a user logs in, a cookie is created with a session ID and CSRF Token associated with the same user on their web broswer. This cookies data is stored on the server side and every time the user makes a request, their session ID and cookie is checked. This allows Django to identify the user based on their session ID and cookies and retrieve data associated with the user's session.
+
+    Cookies can be used to track and study how a user interacts with a website, store items put in a shopping cart and maintain website preferences of the user.
+
+    Cookies that are not secure are not safe to use and they can be used maliciously if stolen from users by hackers, allowing them to impersonate them. 
+
+ 
+## 5. Explain how did you implement the checklist step-by-step (apart from following the tutorial).
+  
+    1. Implement the register, login, and logout functions so that the user can access the application freely.
+    
+
+        1. I first activated the python environment
+        
+        2. I then exported the following functions to views.py
+
+            from django.contrib.auth.forms import UserCreationForm
+            from django.contrib import messages
+
+            So that user accounts can be created
+
+        3. There needs to be a function that uses the UserCreationForm module so I added this in views.py
+
+            def register(request):
+                form = UserCreationForm()
+
+                if request.method == "POST":
+                    form = UserCreationForm(request.POST)
+                    if form.is_valid():
+                        form.save()
+                        messages.success(request, 'Your account has been successfully created!')
+                        return redirect('main:login')
+                context = {'form':form}
+                return render(request, 'register.html', context)
+
+        4. I then created a HTML file caled register.html for showing the user registration form on a web browser in the directory main/templates
+
+        5. I then did URL routing for register in urls.py by importing register and creating an URL path for it
+
+        6. To create the login funtion I imported the following modules in views.py and created a function called login_user
+
+            from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+            from django.contrib.auth import authenticate, login
+
+            def login_user(request):
+                if request.method == 'POST':
+                    form = AuthenticationForm(data=request.POST)
+
+                    if form.is_valid():
+                            user = form.get_user()
+                            login(request, user)
+                            return redirect('main:show_main')
+
+                else:
+                    form = AuthenticationForm(request)
+                context = {'form': form}
+                return render(request, 'login.html', context)
+
+
+        7. I then created another HTML file called login.html in the directory main/templates
+
+        8. Finally, I did URL routing for login in urls.py
+
+        9. For the logout feature I imported these modules and created a function called logout_user in views.py
+
+            from django.contrib.auth import logout
+
+            def logout_user(request):
+                logout(request)
+                return redirect('main:login')
+
+        10. In main.html I added these lines to create a button for logging out
+
+            <a href="{% url 'main:logout' %}">
+                <button>Logout</button>
+            </a>
+
+        11. Before the functions above can be used, I have to block access from the main page for users who are not logged in. To do that I imported this module in views.py
+
+            from django.contrib.auth.decorators import login_required
+
+        12. I then added this line above the show_main function
+
+    2. Make two user accounts with three dummy data each, using the model made in the application beforehand so that each data can be accessed by each account locally.
+
+        1. I created a folder in main directory called management and added an empty file called __init__.py
+        
+        2. I then created another folder called commands and added the files __init__.py which is empty and create_dummy_users.py
+
+        3. I imported libraries and added information for the two dummy users. Here are their login data.
+
+        Account 1:
+            Username: CookieCat
+            Password: cookiecookie123
+
+        Account 2:
+            Username: ChocoDog
+            Password: choco123
+        
+        4. I then ran python manage.py create_dummy_users to create the dummy users
+
+
+    3. Connect the models Product and User.
+
+
+        1. To start I added the following lines in models.py, one at the top and the other below the Product class
+
+            from django.contrib.auth.models import User
+
+            user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+        2. In views.py I altered this if statement under create_product_entry function to this
+            
+                if form.is_valid() and request.method == "POST":
+                    product_entry = form.save(commit=False)
+                    product_entry.user = request.user
+                    product_entry.save()
+                    return redirect('main:show_main')
+
+        3. I added this as a new context in views.py
+
+                    'name': request.user.username,
+
+            and changed .all() in show_main to this
+
+                    filter(user=request.user)
+
+
+    4. Display logged in user details such as username and apply cookies like last login to the application's main page.
+
+        1. To set the cookies up for the latest logged in user, I imported the following modules in views.py
+
+            import datetime
+            from django.http import HttpResponseRedirect
+            from django.urls import reverse
+
+        2. Then in views.py, I changed the code for if form.is_valid() to the following 
+
+            if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+                response = HttpResponseRedirect(reverse("main:show_main"))
+                response.set_cookie('last_login', str(datetime.datetime.now()))
+                return response
+
+        3. I added this line in context of the show_main function in views.py so that the cookies data can be displayed 
+
+                'last_login': request.COOKIES['last_login'],
+
+        4. I changed the code under logout_user to this:
+
+                logout(request)
+                response = HttpResponseRedirect(reverse('main:login'))
+                response.delete_cookie('last_login')
+                return response
+
+        5. I then added this line below the log out button
+
+            <h5>Last login session: {{ last_login }}</h5>
+
 # == ASSIGNMENT 3 QUESTIONS AND ANSWERS: == #
 
 << Link for Screenshots for XML, JSON, XML by ID and JSON by ID >>
