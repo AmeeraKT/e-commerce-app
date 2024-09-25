@@ -1,4 +1,5 @@
 <details>
+<summary> ASSIGNMENT 4 </summary>
 # == ASSIGNMENT 4 QUESTIONS AND ANSWERS: == #
 
 ## 1. What is the difference between HttpResponseRedirect() and redirect()?
@@ -204,6 +205,7 @@
 </details>
 
 <details>
+<summary> ASSIGNMENT 3 </summary>
 # == ASSIGNMENT 3 QUESTIONS AND ANSWERS: == #
 
 << Link for Screenshots for XML, JSON, XML by ID and JSON by ID >>
@@ -361,6 +363,7 @@
 </details>
 
 <details>
+<summary> ASSIGNMENT 2 </summary>
 # == ASSIGNMENT 2 QUESTIONS AND ANSWERS: == #
 
 1>>> Explain how you implemented the checklist above step-by-step (not just following the tutorial).
