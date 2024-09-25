@@ -1,3 +1,4 @@
+<details>
 # == ASSIGNMENT 4 QUESTIONS AND ANSWERS: == #
 
 ## 1. What is the difference between HttpResponseRedirect() and redirect()?
@@ -200,7 +201,9 @@
         5. I then added this line below the log out button
 
             <h5>Last login session: {{ last_login }}</h5>
+</details>
 
+<details>
 # == ASSIGNMENT 3 QUESTIONS AND ANSWERS: == #
 
 << Link for Screenshots for XML, JSON, XML by ID and JSON by ID >>
@@ -355,8 +358,9 @@
             path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
             path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
             ```
+</details>
 
-
+<details>
 # == ASSIGNMENT 2 QUESTIONS AND ANSWERS: == #
 
 1>>> Explain how you implemented the checklist above step-by-step (not just following the tutorial).
@@ -489,3 +493,4 @@
     ORM stands for 'Object Relational Mapper'. An ORM is a technique that essentially connects object oriented programs to relational
     databases. This allows programmers to interact with relational databases through object oriented programming. Django has an ORM which lets it change default database structures into Python classes so that they can be worked with in full Python language, meaning there
     is no need to use SQL language to create or manage a database.
+</details>
