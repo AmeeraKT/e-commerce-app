@@ -1,5 +1,163 @@
 <details>
+<summary>ASSIGNMENT 5</summary>
+
+# == ASSIGNMENT 5 QUESTIONS AND ANSWERS: ==
+
+ ## 1. If there are multiple CSS selectors for an HTML element, explain the priority order of these CSS selectors!
+
+    There are four CSS selectors: inline styles, ID selectors, classes selector and element selector.
+    The most prioritized are the inline styles and the least prioritized are the element selectors.
+
+    Each selector has a specifity value, with inline styles having the highest value. Selectors with the higher value are prioritized more.
+
+ 
+ ## 2. Why does responsive design become an important concept in web application development? Give examples of applications that have and have not implemented responsive design!
+
+    Responsive design is important because it ensures that a website fits the resolution of the device it is being viewed on. Websites should look like it fit the screens of desktops, mobile phones and tablets because if they did not then navigating them would be tedious. For instance, a user navigating a website that is meant to fit a desktop screen on a mobile phone would have to scroll a lot or some buttons on the website would be unaccessible, essentially making the website unuseable -this is unresponsive design.
+
+    For example the Fasilkom SCELE website has responsive design because it can fit both on a desktop and mobile phone screen.  
+        
+    Responsive design makes interacting with websites more engaging and they provide the user with feedback and information regarding their actions on the website. Responsive designs can also indicate if the website is working properly or not. In addition, responsive design follows some of Shneideran's 8 Golden Rules of Interface Design which is offering informative feedback, seek universal usability, strive for consistency and supporting internal locus of control.
+    
+    For example in the mental health tracker website when the cursor hovers over the mood card, it rotates slightly. Another example are buttons that change color when hovered or clicked on.
+
+    Unresponsive design is the opposite. For example buttons can be unresponsive when they are disabled, meaning they cannot be clicked.
+ 
+ ## 3. Explain the differences between margin, border, and padding, and how to implement these three things!
+ 
+    The CSS box model consists of a margin, border, padding and content. With the margin and padding on the outermost and innermost areas respectively. 
+    The margin is an area around the border, padding and content.
+    The border is an area around the content and padding.
+    The padding is an area inside the content.
+
+    There are ways to implement the margin, border and padding which are all implemented in the global.css file.
+    
+    The border can be used in various to style areas around text which is content. They are used to enclose text in a box and the color and thickness of the border can be styled. Examples of such ways as follows border-color: #674ea7, border: 2px solid #bcbcbc; and border-radius: 0.375rem. Borders can also be used to style buttons.
+
+    The padding can be used to style buttons, header, forms and content sections. It specifies color and the area the content will occupy. and  For example this is padding used for a header's dimensions, 20px 20px 20px 40px. In another example, giving a button padding: 10px means that it will be 10 pixels in length and height. Padding color can be changed through this way background-color: rgb(231, 168, 86).
+
+    The margin can be used to style content sections and for managing the placement of the layers inside of the CSS box model. It can be used to justify, or align ext and content to the left or right. For example margin: 0 auto; means that the content will be placed in the center of a the CSS box and a margin can be added to the top, left, right or bottom of content. For example margin-top: 20px; means that the closest other content can be above the first content is 20 pixels.
+
+    Here is an example of all three aspects used together:
+
+    .box-element {
+            margin: 30px; /* the space outside the element */
+            border: 2px solid black; /* the border around the element */
+            padding: 20px; /* the space inside the element */
+        }
+    
+ ## 4. Explain the concepts of flex box and grid layout along with their uses!
+
+    The flex box is a CSS3 layout and is backwards compatible. It eliminates the need to use float and positioning for content such as margins. To create a FlexBox, a flex container has to be made. For example, this flex container:
+    <div class="flex-container">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+    looks like a long blue rectangle with three smaller white squares in it with the numbers 1, 2 and 3 on each box in black, default arial font.
+    To make it flexible, its display must be set this way
+    .flex-container {
+        display: flex;
+    }.
+
+    A flexible flex box can be used to stack flex items horizontally or vertically in the flex box, to add the order of stacking can be changed as well. Flex items can also be warped, not warped or warped in reverse order in the flex box.
+    Flex items can also be justified and aligned in various ways.
+
+    The flex items can also have their size, order and alignment stylized. To add, the area of the entire flex box can be warped to fit on both desktop and mobile phone screens.
+
+
+    The grid layout is a module that uses rows and columns and seperates the space of a webpage into two-dimensional sections. It is used for exact placement of images or items and for creating complex layouts. Grid layouts also enable layering of items.
+
+ ## 5. Explain how you implemented the checklist above step-by-step (not just following the tutorial)!
+
+    1. Implement functions to delete and edit products.
+
+        1. I created a new function called edit_product in views.py.
+    
+        2. I then imported reverse as part of the django.shortcuts.
+
+        3. In main/templates I made a file called edit_product.html.
+
+        4. I then made URL routing for the edit_product.html so that my project will be able to handle editing requests and actually edit products.
+
+        5. In main.html in main/templates I added code to create a button for editing products
+
+        6. In views.py I created a function that will delete products 
+
+        7. Next I did URL routing for delete_products
+
+    2. Customize the design of the HTML templates that have been created in previous assignments using CSS or a CSS framework (such as Bootstrap, Tailwind, Bulma) with the following conditions:
+
+        2. a. Customize the login, register, and add product pages to be as attractive as possible.
+
+            1. In the templates directory I connected my Django project with Tailwind by adding the line below
+            <script src="https://cdn.tailwindcss.com"> </script>.
+
+            2. Then I created a new directory in root called static/css and created a file called global.css.
+
+            3. I then linked global.css in base.html by adding     <link rel="stylesheet" href="{% static 'css/global.css' %}"/>
+
+            4. In global.css I added some styles so that the style on every page will be consistent.
+
+            5. Then I updated the code of login.html in /main/templates to stylize it
+
+            6. Next, I changed the code of register.html in the same directory to add styles
+
+            7. To create the product page I added product_card.html in /main/templates
+
+            8. To display the styled product cards, I changed the code in main.html in /main/templates by including product_card.html
+
+
+        2. b. Customize the product list page to be more attractive and responsive. Then, consider the following conditions:
+
+            i. If there are no products saved in the application, the product list page will display an image and a message that no products are registered.
+            
+                1. To allow my project to display images I went to settings.py in /e_commerce_app and added 'whitenoise.middleware.WhiteNoiseMiddleware' in the MIDDLEWARE section.
+
+                2. Then I created a new directory in root called /static/css and created a folder called images in /static
+
+                3. I added a png image of a sad face in /static and named it sad.png
+
+                4. To display the image, I added a path to it in main.html
+
+                5. To ensure that it will appear if there are no products available, I created an if statement {% if not product_entry %} and included the image source below it
+
+                6. I also added text stating that "There are no cookies data in Cookie Panda."
+ 
+            ii. If there are products saved, the product list page will display details of each product using cards (must not be exactly the same as the design in the Tutorial!).
+
+                1. Following the if statement from earlier, to display the details of each product I created an else statement {% for product_entry in product_entries %}
+            
+                2. Under this statement I included the product cards that will present the product details
+
+                3. I customized the design of each card in card_product.html
+
+    3. For each product card, create two buttons to edit and delete the product on that card!
+
+        1. I put the buttons in card_product.html in their own class
+        
+        2. I then set their colors to blue
+
+        3. The edit and delete button are url routed to edit_product and delete_product respectively so that they can both do what they are supposed to do
+
+    4. Create a navigation bar (navbar) for the features in the application that is responsive to different device sizes, especially mobile and desktop.
+
+        1. To make sure that the website is responsive to different device sizes in general, I added this line in base.html in /templates
+             <meta name="viewport" content="width=device-width, initial-scale=1">.
+        
+        2. To start, I created a file called navbar.html in templates/ directory and filled it with code that will stylize it.
+
+        3. I then linked the navbar.html to main.html, edit_product.html and create_product_entry.html by adding this line {% include 'navbar.html' %} below {% block content %}.
+
+        4. I set the color of the navigation bar to yellow.
+
+        5. The code in navbar.html is divided into two parts, the first part is for showing up on desktops while the other part is for showing up on mobile phones.
+
+</details>
+
+<details>
 <summary> ASSIGNMENT 4 </summary>
+
 # == ASSIGNMENT 4 QUESTIONS AND ANSWERS: ==
 
 ## 1. What is the difference between HttpResponseRedirect() and redirect()?
@@ -206,6 +364,7 @@
 
 <details>
 <summary> ASSIGNMENT 3 </summary>
+
 # == ASSIGNMENT 3 QUESTIONS AND ANSWERS: == #
 
 << Link for Screenshots for XML, JSON, XML by ID and JSON by ID >>
@@ -364,6 +523,7 @@
 
 <details>
 <summary> ASSIGNMENT 2 </summary>
+
 # == ASSIGNMENT 2 QUESTIONS AND ANSWERS: ==
 
 1>>> Explain how you implemented the checklist above step-by-step (not just following the tutorial).
