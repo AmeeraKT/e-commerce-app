@@ -47,7 +47,7 @@
    ```
    
     2. AJAX POST:
-        a. Create a button that opens a modal with a form for adding a mood entry.
+        a. Create a button that opens a modal with a form for adding a product entry.
 
             1. In main/templates main.html, I inserted code that with the help of Tailwind will create a modal
 
@@ -101,7 +101,7 @@
                                       </button>
               </html>
 
-        b. Create a new view function to add a new mood entry to the database.
+        b. Create a new view function to add a new product entry to the database.
 
             1. I imported the following in views.py
                <html>
@@ -109,7 +109,7 @@
                      from django.views.decorators.http import require_POST
                </html>
 
-            2. I then created a new function called add_mood_entry_ajax to add new moods with AJAX in views.py
+            2. I then created a new function called add_product_entry_ajax to add new products with AJAX in views.py
 
 ```python
                 @csrf_exempt
@@ -134,7 +134,7 @@
 
         c. Create a /create-ajax/ path that routes to the new view function you created.
 
-            1. To do this, I added this line path('create-mood-entry-ajax', add_mood_entry_ajax, name='add_mood_entry_ajax') in urpatterns in urls.py
+            1. To do this, I added this line path('create-product-entry-ajax', add_product_entry_ajax, name='add_prodduct_entry_ajax') in urpatterns in urls.py
 
         d. Connect the form you created inside the modal to the /create-ajax/ path.
 
@@ -233,7 +233,7 @@
         
     Responsive design makes interacting with websites more engaging and they provide the user with feedback and information regarding their actions on the website. Responsive designs can also indicate if the website is working properly or not. In addition, responsive design follows some of Shneideran's 8 Golden Rules of Interface Design which is offering informative feedback, seek universal usability, strive for consistency and supporting internal locus of control.
     
-    For example in the mental health tracker website when the cursor hovers over the mood card, it rotates slightly. Another example are buttons that change color when hovered or clicked on.
+    For example in the mental health tracker website when the cursor hovers over the oroduct card, it rotates slightly. Another example are buttons that change color when hovered or clicked on.
 
     Unresponsive design is the opposite. For example buttons can be unresponsive when they are disabled, meaning they cannot be clicked.
  
