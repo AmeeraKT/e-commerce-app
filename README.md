@@ -26,13 +26,12 @@
         a.  Modify the codes in data cards to able to use AJAX GET.
 
             1. In main.html in main/templates I added the code below so that it can retrieve data with AJAX
-  <html>  
-      <script>
-          async function getProductEntries(){
-              return fetch("{% url 'main:show_json' %}").then((res) => res.json())
-          }
-      </script>
+  <html><
+   async function getProductEntries(){
+    return fetch("{% url 'main:show_json' %}").then((res) => res.json())
+   }
   </html>
+  
         b. Retrieve data using AJAX GET. Make sure that the datas retrieved are only the datas belonging to the logged in user.
         
             1.  To do this, I changed the paramater in Product.objects.filter from pk=id to user=request.user in views.py
