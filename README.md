@@ -140,31 +140,31 @@
 
             1. I connected it by adding the function addProductEntry() in main.html in main/templates. The line that connects the modal to creating a new product entry with AJAX is this fetch("{% url 'main:add_product_entry_ajax' %}" ...).
 
- <html>
-        <script>
-                function addProductEntry() {
-                    const form = document.querySelector('#ProductEntryForm'); 
-                    const formItems = new FormData(form);
-                    fetch("{% url 'main:add_product_entry_ajax' %}", {
-                        method: "POST",
-                        body: formItems,
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                        refreshProductEntries();
-                        form.reset();
-                        } else {
-                        alert('Failed to add cookie.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('An error occurred.');
-                    });
-                    return false;
-                    }    
-        </script>
-</html>
+               <html>
+                      <script>
+                              function addProductEntry() {
+                                  const form = document.querySelector('#ProductEntryForm'); 
+                                  const formItems = new FormData(form);
+                                  fetch("{% url 'main:add_product_entry_ajax' %}", {
+                                      method: "POST",
+                                      body: formItems,
+                                  })
+                                  .then(response => {
+                                      if (response.ok) {
+                                      refreshProductEntries();
+                                      form.reset();
+                                      } else {
+                                      alert('Failed to add cookie.');
+                                      }
+                                  })
+                                  .catch(error => {
+                                      console.error('Error:', error);
+                                      alert('An error occurred.');
+                                  });
+                                  return false;
+                                  }    
+                      </script>
+              </html>
 
         e. Perform asynchronous refresh on the main page to display the latest item list without reloading the entire main page.
 
