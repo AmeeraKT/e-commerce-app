@@ -169,15 +169,15 @@
         e. Perform asynchronous refresh on the main page to display the latest item list without reloading the entire main page.
 
             1. Asynchronous refresh happens automatically after I create a new product entry with AJAX. This snippet of code refreshese the page automatically after a product entry is made with AJAX as it calls hideModal();.
-<html>
-              <script>
-                document.getElementById("ProductEntryForm").addEventListener("submit", (e) => {
-                    e.preventDefault();
-                    addProductEntry();
-                    hideModal();
-                    })
-               </script>
-</html>
+               <html>
+                             <script>
+                               document.getElementById("ProductEntryForm").addEventListener("submit", (e) => {
+                                   e.preventDefault();
+                                   addProductEntry();
+                                   hideModal();
+                                   })
+                              </script>
+               </html>
 
         f. Making AJAX GET and AJAX POST secure
             
