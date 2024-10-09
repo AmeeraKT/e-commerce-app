@@ -95,11 +95,11 @@
                 </html>
    
             2. I also added this to make a button for opening the modal form for making a cookie entry with AJAX
-<html>
-                        <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="btn bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" onclick="showModal();">
-                            Add New Cookie Entry by AJAX
-                        </button>
-</html>
+              <html>
+                                      <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="btn bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" onclick="showModal();">
+                                          Add New Cookie Entry by AJAX
+                                      </button>
+              </html>
 
         b. Create a new view function to add a new mood entry to the database.
 
