@@ -104,7 +104,7 @@
         b. Create a new view function to add a new mood entry to the database.
 
             1. I imported the following in views.py
-<html><
+<html>
       from django.views.decorators.csrf import csrf_exempt
       from django.views.decorators.http import require_POST
 </html>
