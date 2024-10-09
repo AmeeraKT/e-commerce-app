@@ -26,29 +26,33 @@
         a.  Modify the codes in data cards to able to use AJAX GET.
 
             1. In main.html in main/templates I added the code below so that it can retrieve data with AJAX
-  ```    
+  <html>  
       <script>
           async function getProductEntries(){
               return fetch("{% url 'main:show_json' %}").then((res) => res.json())
           }
       </script>
-   ```
+  </html>
         b. Retrieve data using AJAX GET. Make sure that the datas retrieved are only the datas belonging to the logged in user.
         
-            1.  To do this, I changed the paramater in Product.objects.filter from pk=id to user=request.user
-                def show_xml_by_id(request, id):
-                    data = Product.objects.filter(user=request.user)
-                    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+            1.  To do this, I changed the paramater in Product.objects.filter from pk=id to user=request.user in views.py
+   
+   ```python
+           def show_xml_by_id(request, id):
+               data = Product.objects.filter(user=request.user)
+               return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
-                def show_json_by_id(request, id):
-                    data = Product.objects.filter(user=request.user)
-                    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
-
+           def show_json_by_id(request, id):
+               data = Product.objects.filter(user=request.user)
+               return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+   ```
+   
     2. AJAX POST:
         a. Create a button that opens a modal with a form for adding a mood entry.
 
             1. In main/templates main.html, I inserted code that with the help of Tailwind will create a modal
 
+   <html>
                 <div id="crudModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
                     <div id="crudModalContent" class="relative bg-white rounded-lg shadow-lg w-5/6 sm:w-3/4 md:w-1/2 lg:w-1/3 mx-4 sm:mx-0 transform scale-95 opacity-0 transition-transform transition-opacity duration-300 ease-out">
                         <!-- Modal header -->
@@ -66,10 +70,8 @@
                         <!-- Modal body -->
                         <div class="px-6 py-4 space-y-6 form-style">
                         <form id="ProductEntryForm">
-                        
                             <!-- Added csrf token -->
                             {% csrf_token %}
-
                             <div class="mb-4">
                             <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                             <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-blue-700" placeholder="Enter cookie name" required>
@@ -91,21 +93,26 @@
                         </div>
                     </div>
                     </div>
-
+   </html>
+   
             2. I also added this to make a button for opening the modal form for making a cookie entry with AJAX
-
+<html>
                         <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="btn bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" onclick="showModal();">
                             Add New Cookie Entry by AJAX
                         </button>
+</html>
 
         b. Create a new view function to add a new mood entry to the database.
 
             1. I imported the following in views.py
-                from django.views.decorators.csrf import csrf_exempt
-                from django.views.decorators.http import require_POST
+<html><
+      from django.views.decorators.csrf import csrf_exempt
+      from django.views.decorators.http import require_POST
+</html>
 
             2. I then created a new function called add_mood_entry_ajax to add new moods with AJAX in views.py
 
+```python
                 @csrf_exempt
                 @require_POST
                 def add_product_entry_ajax(request):
@@ -122,6 +129,7 @@
                     new_product.save()
 
                     return HttpResponse(b"CREATED", status=201)
+```
 
             3. Next I did URL routing for the new function by importing add_product_entry_ajax in urls.py
 
@@ -133,11 +141,11 @@
 
             1. I connected it by adding the function addProductEntry() in main.html in main/templates. The line that connects the modal to creating a new product entry with AJAX is this fetch("{% url 'main:add_product_entry_ajax' %}" ...).
 
+ <html>
+        <script>
                 function addProductEntry() {
-    
                     const form = document.querySelector('#ProductEntryForm'); 
                     const formItems = new FormData(form);
-
                     fetch("{% url 'main:add_product_entry_ajax' %}", {
                         method: "POST",
                         body: formItems,
@@ -154,19 +162,23 @@
                         console.error('Error:', error);
                         alert('An error occurred.');
                     });
-
                     return false;
                     }    
+        </script>
+</html>
 
         e. Perform asynchronous refresh on the main page to display the latest item list without reloading the entire main page.
 
             1. Asynchronous refresh happens automatically after I create a new product entry with AJAX. This snippet of code refreshese the page automatically after a product entry is made with AJAX as it calls hideModal();.
-
+<html>
+              <script>
                 document.getElementById("ProductEntryForm").addEventListener("submit", (e) => {
                     e.preventDefault();
                     addProductEntry();
                     hideModal();
                     })
+               </script>
+</html>
 
         f. Making AJAX GET and AJAX POST secure
             
