@@ -53,7 +53,7 @@
 
             1. In main/templates main.html, I inserted code that with the help of Tailwind will create a modal
 
-                <html>
+   ```html
                              <div id="crudModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
                                  <div id="crudModalContent" class="relative bg-white rounded-lg shadow-lg w-5/6 sm:w-3/4 md:w-1/2 lg:w-1/3 mx-4 sm:mx-0 transform scale-95 opacity-0 transition-transform transition-opacity duration-300 ease-out">
                                      <!-- Modal header -->
@@ -94,22 +94,22 @@
                                      </div>
                                  </div>
                                  </div>
-                </html>
+  ```
    
             2. I also added this to make a button for opening the modal form for making a cookie entry with AJAX
-              <html>
+  ```html
                                       <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="btn bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" onclick="showModal();">
                                           Add New Cookie Entry by AJAX
                                       </button>
-              </html>
+  ```
 
         b. Create a new view function to add a new product entry to the database.
 
             1. I imported the following in views.py
-               <html>
+```html
                      from django.views.decorators.csrf import csrf_exempt
                      from django.views.decorators.http import require_POST
-               </html>
+```
 
             2. I then created a new function called add_product_entry_ajax to add new products with AJAX in views.py
 
@@ -142,7 +142,7 @@
 
             1. I connected it by adding the function addProductEntry() in main.html in main/templates. The line that connects the modal to creating a new product entry with AJAX is this fetch("{% url 'main:add_product_entry_ajax' %}" ...).
 
-               <html>
+```html
                       <script>
                               function addProductEntry() {
                                   const form = document.querySelector('#ProductEntryForm'); 
@@ -166,12 +166,12 @@
                                   return false;
                                   }    
                       </script>
-              </html>
+```
 
         e. Perform asynchronous refresh on the main page to display the latest item list without reloading the entire main page.
 
             1. Asynchronous refresh happens automatically after I create a new product entry with AJAX. This snippet of code refreshese the page automatically after a product entry is made with AJAX as it calls hideModal();.
-               <html>
+```html
                              <script>
                                document.getElementById("ProductEntryForm").addEventListener("submit", (e) => {
                                    e.preventDefault();
@@ -179,7 +179,7 @@
                                    hideModal();
                                    })
                               </script>
-               </html>
+```
 
         f. Making AJAX GET and AJAX POST secure
             
@@ -188,6 +188,7 @@
 
             2. I then added strip_tags in the following code snippets:
 
+```python
                 This snippet is in forms.py:
                     def clean_name(self):
                         name = self.cleaned_data["name"]
@@ -209,7 +210,7 @@
                         price = strip_tags(request.POST.get("price"))
                         description = strip_tags(request.POST.get("description"))
                         ...
-
+```
 
 
 </details>
